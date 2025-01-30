@@ -1,10 +1,10 @@
-package com.example.CinemaTicketServer;
+package com.example.CinemaTicketServer.Repository;
 
 import java.sql.*;
 
 public class Repository {
     Repository() throws SQLException {
-        String url = "jdbc:sqlite:C:\\Users\\vivian.potts\\Documents\\Databases\\CinemaDatabaseStuff\\Master.db";
+        String url = "jdbc:sqlite:C:\\Users\\efi.whiteley\\Documents\\Databases\\Master.db";
 
         Connection con = DriverManager.getConnection(url);
 
