@@ -22,11 +22,11 @@ public class Movie implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String movieName;
     private String ageRating;
-    private int duration;}
+    private int duration;
 
-//    public Movie(String movieName, String ageRating, int duration){
-//        this.movieName = movieName;
-//        this.ageRating = ageRating;
-//        this.duration = duration;
-//    }
-//}
+    public Movie(String movieName, String ageRating, int duration){
+        this.movieName = movieName;
+        this.ageRating = ageRating;
+        this.duration = duration;
+    }
+}
