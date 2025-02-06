@@ -1,5 +1,4 @@
 package com.example.CinemaTicketServer.Service;
-
 import com.example.CinemaTicketServer.Model.AdminUsers;
 import com.example.CinemaTicketServer.Repository.AdminUsersRepository;
 import org.mindrot.jbcrypt.BCrypt;
@@ -12,11 +11,27 @@ public class AdminUsersService {
     @Autowired
     private AdminUsersRepository auRepo;
 
-    static String hashPass(String password) {
-        return BCrypt.hashpw(password, BCrypt.gensalt(5));
+    public void findUser(String username){
+        auRepo.findUser(username);
     }
 
-    static boolean checkPass(String password, String hashedPass){
-        return BCrypt.checkpw(password, hashedPass);
+    public void addUser(String username, String password){
+
+        String hashedPass = BCrypt.hashpw(password, BCrypt.gensalt(2));
+
+        AdminUsers user = new AdminUsers();
+        user.setUsername(username);
+        user.setPassword(hashedPass);
+
+        auRepo.save(user);
     }
+    public boolean validateUser(String username, String password){
+
+        AdminUsers user = auRepo.findUser(username);
+        return BCrypt.checkpw(password, user.getPassword());
+    }
+
+
+
+
 }

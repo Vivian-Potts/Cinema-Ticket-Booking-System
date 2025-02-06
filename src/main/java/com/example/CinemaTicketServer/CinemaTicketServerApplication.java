@@ -21,6 +21,7 @@ public class CinemaTicketServerApplication {
 
 
 
+
 //		HttpResponse<String> response = Unirest.get("https://moviedatabase8.p.rapidapi.com/Search/Incep")
 //				.header("x-rapidapi-key", "dc694cf22bmsh248518358bf652ap111db4jsnd3bc78035382")
 //				.header("x-rapidapi-host", "moviedatabase8.p.rapidapi.com")
