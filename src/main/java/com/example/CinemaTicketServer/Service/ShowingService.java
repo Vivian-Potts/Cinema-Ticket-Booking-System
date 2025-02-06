@@ -5,7 +5,7 @@ import com.example.CinemaTicketServer.Repository.ShowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @org.springframework.stereotype.Service
-public class Service {
+public class ShowingService {
 
     @Autowired
     private ShowingRepository showingRepo;
