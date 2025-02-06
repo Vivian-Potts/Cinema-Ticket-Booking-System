@@ -1,20 +1,18 @@
 package com.example.CinemaTicketServer.Service;
 
 import com.example.CinemaTicketServer.Model.Movie;
-import com.example.CinemaTicketServer.Model.Showing;
 import com.example.CinemaTicketServer.Repository.MovieRepository;
-import com.example.CinemaTicketServer.Repository.ShowingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@org.springframework.stereotype.Service
-public class Service {
+@Service
+public class MovieService {
 
     @Autowired
-    private ShowingRepository showingRepo;
-    @Autowired
     private MovieRepository movieRepo;
+
 
     void saveMovie(Movie movie){
         movieRepo.save(movie);
@@ -22,11 +20,7 @@ public class Service {
 
     Optional<Movie> getMovie(int query){
         return movieRepo.findById(query);
-        
+
     }
 
-
-    void saveBooking(Showing showing){
-        showingRepo.save(showing);
-    }
 }
