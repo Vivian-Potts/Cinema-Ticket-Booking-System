@@ -1,33 +1,42 @@
 package com.example.CinemaTicketServer.Model;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
 
-
-
-
+@Component
 @Getter
 @Setter
 @Entity
-@Component
 
-public class Movie implements Serializable {
+
+public class AdminUsers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String movieName;
-    private String ageRating;
-    private int duration;
+    private String username;
+    private String password;
 
-    public Movie(String movieName, String ageRating, int duration){
-        this.movieName = movieName;
-        this.ageRating = ageRating;
-        this.duration = duration;
+    public AdminUsers(String username, String password){
+        this.username = username;
+        this.password = password;
     }
+
+
+
+
+
+
+
+
+
+
+
+
 }
