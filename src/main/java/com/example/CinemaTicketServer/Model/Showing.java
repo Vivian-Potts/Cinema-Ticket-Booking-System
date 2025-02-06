@@ -6,7 +6,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import java.lang.String;
 
 import java.time.OffsetDateTime;
 
@@ -22,12 +24,12 @@ public class Showing {
     private int screenNumber;
     private OffsetDateTime timeOfStart;
     private OffsetDateTime timeOfFinish;
-    private String bookedSeats;
+    private String bookedSeats = "";
 
-    Showing(){
+    public Showing(){
         for(int i = 0; i < 200; i++){
             bookedSeats.concat("E");
         }
 
-    }
+   }
 }
