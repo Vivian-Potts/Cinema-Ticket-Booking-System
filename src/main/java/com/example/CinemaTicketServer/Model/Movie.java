@@ -10,24 +10,23 @@ import org.springframework.stereotype.Component;
 import java.io.Serializable;
 
 
-
-
 @Getter
 @Setter
 @Entity
-@Component
+
 
 public class Movie implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int movieId;
     private String movieName;
     private String ageRating;
     private int duration;
 
-    public Movie(String movieName, String ageRating, int duration){
-        this.movieName = movieName;
-        this.ageRating = ageRating;
-        this.duration = duration;
-    }
+//    public Movie(String movieName, String ageRating, int duration){
+//        this.movieName = movieName;
+//        this.ageRating = ageRating;
+//        this.duration = duration;
+//    }
 }

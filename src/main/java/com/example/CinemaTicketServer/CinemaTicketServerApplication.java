@@ -2,6 +2,7 @@ package com.example.CinemaTicketServer;
 
 import com.example.CinemaTicketServer.Model.AdminUsers;
 import com.example.CinemaTicketServer.Model.Movie;
+import com.example.CinemaTicketServer.Service.AdminUsersService;
 import kong.unirest.core.HttpResponse;
 import kong.unirest.core.Unirest;
 import org.springframework.boot.SpringApplication;
@@ -17,6 +18,7 @@ public class CinemaTicketServerApplication {
 		ApplicationContext context = SpringApplication.run(CinemaTicketServerApplication.class, args);
 
 		//Movie movie = new Movie("Movie","18",90);
+
 
 
 

@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AdminUsersRepository extends JpaRepository<AdminUsers, String> {
+public interface AdminUsersRepository extends JpaRepository<AdminUsers, Integer> {
 
-
+AdminUsers findByUsername(String username);
 }
