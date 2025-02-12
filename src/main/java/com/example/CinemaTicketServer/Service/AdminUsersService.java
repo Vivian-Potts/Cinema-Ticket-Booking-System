@@ -11,27 +11,32 @@ public class AdminUsersService {
     @Autowired
     private AdminUsersRepository auRepo;
 
-    public void findUser(String username){
-        auRepo.findUser(username);
+    public AdminUsers findUser(String username) {
+        return auRepo.findByUsername(username);
     }
 
-    public void addUser(String username, String password){
-
-        String hashedPass = BCrypt.hashpw(password, BCrypt.gensalt(2));
-
+    public AdminUsers addUser(String username, String password) {
+        String hashedPass = BCrypt.hashpw(password, BCrypt.gensalt(10));
         AdminUsers user = new AdminUsers();
         user.setUsername(username);
         user.setPassword(hashedPass);
-
         auRepo.save(user);
-    }
-    public boolean validateUser(String username, String password){
 
-        AdminUsers user = auRepo.findUser(username);
+        return user;
+    }
+
+
+    public boolean validateUser(String username, String password) {
+        AdminUsers user = auRepo.findByUsername(username);
+        if (user == null) {
+            return false;
+        }
         return BCrypt.checkpw(password, user.getPassword());
     }
 
 
-
-
 }
+
+
+
+
