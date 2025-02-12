@@ -87,7 +87,7 @@
 			<groupId>com.konghq</groupId>
 			<artifactId>unirest-java-core</artifactId>
 			<version>4.4.5</version>
-			<scope>provided</scope>
+<!--			<scope>provided</scope>-->
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-test -->
