@@ -5,14 +5,20 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AdminUsersService {
 
     @Autowired
     private AdminUsersRepository auRepo;
 
-    public AdminUsers findUser(String username) {
+    public AdminUsers findUser(String username){
         return auRepo.findByUsername(username);
+    }
+
+    public List<AdminUsers> getUsers(){
+        return auRepo.findAll();
     }
 
     public AdminUsers addUser(String username, String password) {

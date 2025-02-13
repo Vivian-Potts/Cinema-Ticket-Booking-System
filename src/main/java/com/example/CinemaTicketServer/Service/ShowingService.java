@@ -15,6 +15,17 @@ public class ShowingService {
     @Autowired
     private ShowingRepository showingRepo;
 
+    // Get all showings
+    public List<Showing> getShowings() {
+        return showingRepo.findAll();
+    }
+
+    // Get showings for a specific movie
+    public List<Showing> getShowingMovies(String title) {
+        return showingRepo.findByMovieTitle(title);
+    }
+
+
     // Method for booking seats
     public void saveBooking(int id, List<String> seats) {
 
@@ -28,7 +39,7 @@ public class ShowingService {
         checkSeats(seats, bookedSeats);
 
         bookedSeats.addAll(seats);
-        updateSeats(showing, bookedSeats);
+        //updateSeats(showing, bookedSeats);
     }
 
 
@@ -45,7 +56,7 @@ public class ShowingService {
 
     // Retrieve booked seats
     private List<String> getBookedSeats(Showing showing) {
-        String bookedSeats = showing.getBookedSeats();
+        String bookedSeats = showing.getSeats().toString();
         if (bookedSeats == null || bookedSeats.isEmpty()) {
             return new ArrayList<>();
         }
@@ -62,19 +73,10 @@ public class ShowingService {
     }
 
     // Update seats after booking
-    private void updateSeats(Showing showing, List<String> bookedSeats) {
-        String updatedSeats = String.join(",", bookedSeats);
-        showing.setBookedSeats(updatedSeats);
-        showingRepo.save(showing);
-    }
+//    private void updateSeats(Showing showing, List<String> bookedSeats) {
+//        String updatedSeats = String.join(",", bookedSeats);
+//        showing.setSeats(updatedSeats);
+//        showingRepo.save(showing);
+//    }
 
-    // Get all showings
-    public List<Showing> getShowings() {
-        return showingRepo.findAll();
-    }
-
-    // Get showings for a specific movie
-    public List<Showing> getShowingMovies(String movieName) {
-        return showingRepo.findByMovieMovieName(movieName);
-    }
 }
