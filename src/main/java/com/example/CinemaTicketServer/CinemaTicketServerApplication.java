@@ -19,27 +19,5 @@ public class CinemaTicketServerApplication {
 
 	public static void main(String[] args) throws SQLException, IOException {
 		ApplicationContext context = SpringApplication.run(CinemaTicketServerApplication.class, args);
-
-		MovieApi movieApi = (MovieApi) context.getBean(MovieApi.class);
-
-		ObjectMapper objectMapper = (ObjectMapper)context.getBean(ObjectMapper.class);
-
-		String a = movieApi.getByTitle("The Godfather");
-
-		System.out.println(a);
-
-		Movie movie = objectMapper.readValue(a,Movie.class);
-
-		System.out.println(movie.getTitle());
-
-
-
-
-
-
-
-
-
-
 	}
 }

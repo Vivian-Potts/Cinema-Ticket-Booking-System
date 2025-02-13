@@ -28,9 +28,10 @@ public class MovieService {
     }
 
     public Optional<Movie> getMovie(String name) throws JsonProcessingException {
-        Movie movie = movieRepo.findByTitle("Blue Lock: Episode Nagi");
+        Movie movie = movieRepo.findByTitle(name);
         if (movie == null){
             movie = objectMapper.readValue(movieApi.getByTitle(name),Movie.class);
+            saveMovie(movie);
         }
         //THIS IS NOT GONNA HANDLE NULL VERY WELL PLEASE DONT JUST LEAVE IT PLEASE
         return Optional.ofNullable(movie);

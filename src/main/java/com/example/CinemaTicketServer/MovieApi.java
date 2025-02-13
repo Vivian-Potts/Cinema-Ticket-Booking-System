@@ -10,16 +10,6 @@ import java.net.URL;
 @Component
 public class MovieApi {
     public String getByTitle(String query){
-
-        if (query.equals("Blue Lock: Episode Nagi")){
-            return "{\"Title\":\"Blue Lock: Episode Nagi\",\"Year\":\"2024\",\"Rated\":\"PG-13\",\"Released\":\"28 Jun 2024\",\"Runtime\":\"91 min\",\"Genre\":\"Animation, Drama, Sport\",\"Director\":\"Shunsuke Ishikawa\",\"Writer\":\"Muneyuki Kaneshiro, Taku Kishimoto, Yusuke Nomura\",\"Actors\":\"Nobunaga Shimazaki, Yuma Uchida, Kazuyuki Okitsu\",\"Plot\":\"Seishiro Nagi before he enters the titular Blue Lock facility.\",\"Language\":\"Japanese\",\"Country\":\"Japan\",\"Awards\":\"N/A\",\"Poster\":\"https://m.media-amazon.com/images/M/MV5BNjliYmU5N2EtYmNjNi00NGM0LWEzZWItN2Q0YzM5YTk4Y2Q1XkEyXkFqcGc@._V1_SX300.jpg\",\"Ratings\":[{\"Source\":\"Internet Movie Database\",\"Value\":\"6.6/10\"}],\"Metascore\":\"N/A\",\"imdbRating\":\"6.6\",\"imdbVotes\":\"2,270\",\"imdbID\":\"tt28671146\",\"Type\":\"movie\",\"DVD\":\"N/A\",\"BoxOffice\":\"$1,855,384\",\"Production\":\"N/A\",\"Website\":\"N/A\",\"Response\":\"True\"}\n";
-        }
-//        else{
-//            if (true == true) {
-//                return null;
-//            }
-//        }
-
         //Code created by Chat-gpt
         try {
             //Adapt query to URL
