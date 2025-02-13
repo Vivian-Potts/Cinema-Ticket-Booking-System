@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Getter
-@Setter
+//@Getter
+//@Setter
 @Component
 @Entity
 public class Movie {
@@ -95,6 +95,11 @@ public class Movie {
 
     @JsonProperty("Response")
     private String response;
+
+    public String getTitle(){
+        return title;
+    }
+
 
     @Getter
     @Setter

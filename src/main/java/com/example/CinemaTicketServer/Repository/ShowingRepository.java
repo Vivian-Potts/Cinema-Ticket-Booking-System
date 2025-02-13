@@ -12,6 +12,7 @@ public interface ShowingRepository extends JpaRepository<Showing, Integer> {
 
     Showing findById(int id);
 
+
     List<Showing> findByMovieTitle(String title);
 }
 
