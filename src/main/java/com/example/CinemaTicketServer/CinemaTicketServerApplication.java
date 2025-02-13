@@ -1,37 +1,31 @@
 package com.example.CinemaTicketServer;
 
-import com.example.CinemaTicketServer.Model.AdminUsers;
-import com.example.CinemaTicketServer.Model.Movie;
-import com.example.CinemaTicketServer.Service.AdminUsersService;
-import kong.unirest.core.HttpResponse;
-import kong.unirest.core.Unirest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 
+import java.io.IOException;
 import java.sql.SQLException;
 
 @SpringBootApplication
 public class CinemaTicketServerApplication {
 
-	public static void main(String[] args) throws SQLException {
+	public static void main(String[] args) throws SQLException, IOException {
 		ApplicationContext context = SpringApplication.run(CinemaTicketServerApplication.class, args);
 
-		//Movie movie = new Movie("Movie","18",90);
-
-
-
-
-
-//		HttpResponse<String> response = Unirest.get("https://moviedatabase8.p.rapidapi.com/Search/Incep")
-//				.header("x-rapidapi-key", "dc694cf22bmsh248518358bf652ap111db4jsnd3bc78035382")
-//				.header("x-rapidapi-host", "moviedatabase8.p.rapidapi.com")
-//				.asString();
+		MovieApi movieApi = (MovieApi) context.getBean(MovieApi.class);
 //
-//		System.out.println(response.getHeaders());
+//		ObjectMapper objectMapper = (ObjectMapper)context.getBean(ObjectMapper.class);
+//
+		String a = movieApi.getByTitle("Blue Lock: Episode Nagi");
+//
+		System.out.println(a);
+//
+//		Movie movie = objectMapper.readValue(a,Movie.class);
 
 
 
+//		System.out.println(movie);
 
 
 

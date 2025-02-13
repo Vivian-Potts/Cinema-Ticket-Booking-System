@@ -15,7 +15,7 @@ public class MovieService {
 
 
     void saveMovie(Movie movie){
-        movieRepo.save(movie);
+//        movieRepo.save(movie);
     }
 
     Optional<Movie> getMovie(int query){

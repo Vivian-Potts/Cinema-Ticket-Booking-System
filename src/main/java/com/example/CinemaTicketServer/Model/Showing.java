@@ -16,7 +16,7 @@ public class Showing {
     private int showingId;
     @ManyToOne
     @JoinColumn(name = "movie_id")
-    private Movie movie;
+//    private Movie movie;
     private int screenNumber;
     private OffsetDateTime timeOfStart;
     private OffsetDateTime timeOfFinish;
