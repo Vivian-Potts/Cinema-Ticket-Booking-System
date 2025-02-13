@@ -23,7 +23,7 @@ public class MovieApi {
         //Code created by Chat-gpt
         try {
             //Adapt query to URL
-            query.equals(query.replaceAll(" ","+"));
+            query = (query.replaceAll(" ","+"));
 
             String dummyUrl = "http://www.omdbapi.com/?t=" + query + "&plot=full&apikey=bab8d5a7";
 
