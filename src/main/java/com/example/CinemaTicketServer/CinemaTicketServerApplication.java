@@ -17,7 +17,7 @@ public class CinemaTicketServerApplication {
 //
 //		ObjectMapper objectMapper = (ObjectMapper)context.getBean(ObjectMapper.class);
 //
-		String a = movieApi.getByTitle("Blue Lock: Episode Nagi");
+		String a = movieApi.getByTitle("The Godfather");
 //
 		System.out.println(a);
 //

@@ -10,13 +10,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/showings")
 public class ShowingController {
 
     @Autowired
     private ShowingService showingService;
 
-    @GetMapping
+    @GetMapping("/showings")
     public List<Showing> getShowings() {
         return showingService.getShowings();
     }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import java.lang.String;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 @Entity
 //@Getter
@@ -16,18 +17,20 @@ public class Showing {
     private int showingId;
     @ManyToOne
     @JoinColumn(name = "movie_id")
-//    private Movie movie;
+    private Movie movie;
     private int screenNumber;
     private OffsetDateTime timeOfStart;
     private OffsetDateTime timeOfFinish;
-    private String bookedSeats = "";
 
-    public Showing(){
-        for(int i = 0; i < 200; i++){
-            bookedSeats.concat("E");
-        }
+    @OneToMany(mappedBy = "showing")
+    private List<Seat> seats;
 
-   }
+//    public Showing(){
+//        for(int i = 0; i < 200; i++){
+//            bookedSeats.concat("E");
+//        }
+//
+//   }
 
     public int getShowingId() {
         return showingId;
@@ -69,11 +72,11 @@ public class Showing {
         this.timeOfFinish = timeOfFinish;
     }
 
-    public String getBookedSeats() {
-        return bookedSeats;
+    public List<Seat> getSeats() {
+        return seats;
     }
 
-    public void setBookedSeats(String bookedSeats) {
-        this.bookedSeats = bookedSeats;
+    public void setSeats(List<Seat> seats) {
+        this.seats = seats;
     }
 }
