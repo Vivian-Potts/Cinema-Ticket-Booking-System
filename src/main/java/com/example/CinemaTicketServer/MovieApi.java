@@ -10,6 +10,8 @@ import java.net.URL;
 @Component
 public class MovieApi {
     public String getByTitle(String query){
+
+        System.out.println("Querying API");
         //Code created by Chat-gpt
         try {
             //Adapt query to URL

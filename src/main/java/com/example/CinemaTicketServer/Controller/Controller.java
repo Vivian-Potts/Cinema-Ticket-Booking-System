@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -26,7 +27,8 @@ public class Controller {
 
     @GetMapping("/get")
     @ResponseBody
-    public Optional<Movie> showExampleMovie(@RequestParam String title) throws JsonProcessingException {
+    public List<Movie> showExampleMovie(@RequestParam String title) throws JsonProcessingException {
+        System.out.println("Querying: "+title);
         return movieService.getMovie(title);
     }
 }

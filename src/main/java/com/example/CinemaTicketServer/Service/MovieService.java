@@ -3,12 +3,18 @@ package com.example.CinemaTicketServer.Service;
 import com.example.CinemaTicketServer.Model.Movie;
 import com.example.CinemaTicketServer.MovieApi;
 import com.example.CinemaTicketServer.Repository.MovieRepository;
+import com.example.CinemaTicketServer.StringCapitaliser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.hibernate.type.descriptor.java.CharacterArrayJavaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+
+
 
 @Service
 public class MovieService {
@@ -27,14 +33,24 @@ public class MovieService {
         movieRepo.save(movie);
     }
 
-    public Optional<Movie> getMovie(String name) throws JsonProcessingException {
-        Movie movie = movieRepo.findByTitleIgnoreCase(name);
-        if (movie == null){
-            movie = objectMapper.readValue(movieApi.getByTitle(name),Movie.class);
-            saveMovie(movie);
+    public List<Movie> getMovie(String name) throws JsonProcessingException {
+
+
+
+        name = StringCapitaliser.capitaliseString(name);
+
+        List<Movie> results = movieRepo.findByTitleIgnoreCase(name);
+        if (results.isEmpty()){
+            List<Movie>apiResult = Collections.singletonList(objectMapper.readValue(movieApi.getByTitle(name), Movie.class));
+            System.out.println("Pulled from api: "+apiResult.getFirst().getTitle());
+            if (apiResult.getFirst().getTitle() != null) {
+                saveMovie(apiResult.getFirst());
+                return apiResult;
+            }
         }
         //THIS IS NOT GONNA HANDLE NULL VERY WELL PLEASE DONT JUST LEAVE IT PLEASE
-        return Optional.ofNullable(movie);
+        return results;
+
 
     }
 

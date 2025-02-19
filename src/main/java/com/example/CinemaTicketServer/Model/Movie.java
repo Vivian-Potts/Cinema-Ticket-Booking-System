@@ -10,16 +10,18 @@ import lombok.Setter;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.util.Locale;
 
-//@Getter
-//@Setter
+@Getter
+@Setter
+@Component
 @Entity
 public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int movieId;
+
 
 
 
@@ -103,8 +105,6 @@ public class Movie {
     public String getTitle(){
         return title;
     }
-
-
 
 
     @Getter
