@@ -28,7 +28,7 @@ public class MovieService {
     }
 
     public Optional<Movie> getMovie(String name) throws JsonProcessingException {
-        Movie movie = movieRepo.findByTitle(name);
+        Movie movie = movieRepo.findByTitleIgnoreCase(name);
         if (movie == null){
             movie = objectMapper.readValue(movieApi.getByTitle(name),Movie.class);
             saveMovie(movie);

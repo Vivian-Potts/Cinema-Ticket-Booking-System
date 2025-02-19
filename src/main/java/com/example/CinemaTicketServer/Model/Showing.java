@@ -16,7 +16,7 @@ public class Showing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int showingId;
     @ManyToOne
-    @JoinColumn(name = "movie_id")
+    @JoinColumn(name = "movieId")
     private Movie movie;
     private int screenNumber;
     private OffsetDateTime timeOfStart;
