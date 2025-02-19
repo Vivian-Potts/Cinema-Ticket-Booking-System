@@ -86,13 +86,13 @@ public class ShowingService {
         }
 
         String title = showing.getMovie().getTitle();
-        Movie movie = movieRepo.findByTitleIgnoreCase(title);
+        List<Movie> movie = movieRepo.findByTitleIgnoreCase(title);
 
         if (movie == null) {
             throw new RuntimeException("Movie not found");
         }
 
-        showing.setMovie(movie);
+        showing.setMovie((Movie) movie);
         Showing savedShowing = showingRepo.save(showing);
 
         if (savedShowing == null) {
