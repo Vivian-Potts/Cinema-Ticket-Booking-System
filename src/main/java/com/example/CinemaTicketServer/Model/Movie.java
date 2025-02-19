@@ -14,13 +14,15 @@ import java.util.List;
 
 //@Getter
 //@Setter
-@Component
 @Entity
 public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    int movieId;
+
+
+
 
     @JsonProperty("Title")
     private String title;
@@ -101,6 +103,8 @@ public class Movie {
     public String getTitle(){
         return title;
     }
+
+
 
 
     @Getter

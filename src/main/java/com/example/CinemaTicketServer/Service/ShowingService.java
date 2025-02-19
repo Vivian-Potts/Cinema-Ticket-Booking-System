@@ -1,10 +1,15 @@
 package com.example.CinemaTicketServer.Service;
 
+import com.example.CinemaTicketServer.Model.AdminUsers;
+import com.example.CinemaTicketServer.Model.Movie;
 import com.example.CinemaTicketServer.Model.Showing;
+import com.example.CinemaTicketServer.Repository.MovieRepository;
 import com.example.CinemaTicketServer.Repository.ShowingRepository;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +19,8 @@ import java.util.List;
 public class ShowingService {
     @Autowired
     private ShowingRepository showingRepo;
+    @Autowired
+    private MovieRepository movieRepo;
 
     // Get all showings
     public List<Showing> getShowings() {
@@ -72,7 +79,33 @@ public class ShowingService {
         }
     }
 
-    // Update seats after booking
+    public Showing addShowing(Showing showing) {
+
+        if (showing.getMovie() == null || showing.getMovie().getTitle() == null) {
+            throw new RuntimeException("Movie or Movie title is null");
+        }
+
+        String title = showing.getMovie().getTitle();
+        Movie movie = movieRepo.findByTitleIgnoreCase(title);
+
+        if (movie == null) {
+            throw new RuntimeException("Movie not found");
+        }
+
+        showing.setMovie(movie);
+        Showing savedShowing = showingRepo.save(showing);
+
+        if (savedShowing == null) {
+            throw new RuntimeException("Failed to save the showing");
+        }
+
+        return savedShowing;
+    }
+
+
+
+
+//    // Update seats after booking
 //    private void updateSeats(Showing showing, List<String> bookedSeats) {
 //        String updatedSeats = String.join(",", bookedSeats);
 //        showing.setSeats(updatedSeats);
