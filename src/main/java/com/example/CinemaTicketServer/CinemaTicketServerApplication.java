@@ -13,10 +13,6 @@ import java.sql.SQLException;
 
 @SpringBootApplication
 public class CinemaTicketServerApplication {
-
-	@Autowired
-    private MovieService movieService;
-
 	public static void main(String[] args) throws SQLException, IOException {
 		ApplicationContext context = SpringApplication.run(CinemaTicketServerApplication.class, args);
 	}
