@@ -86,13 +86,16 @@ public class ShowingService {
         }
 
         String title = showing.getMovie().getTitle();
-        List<Movie> movie = movieRepo.findByTitleIgnoreCase(title);
+        String year = showing.getMovie().getYear();
 
-        if (movie == null) {
+        List<Movie> movies = movieRepo.findByTitleIgnoreCase(title);
+        if (movies == null || movies.isEmpty()) {
             throw new RuntimeException("Movie not found");
         }
 
-        showing.setMovie((Movie) movie);
+        Movie movie = movies.get(0);
+
+        showing.setMovie(movie);
         Showing savedShowing = showingRepo.save(showing);
 
         if (savedShowing == null) {

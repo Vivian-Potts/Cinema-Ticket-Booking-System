@@ -1,9 +1,6 @@
 package com.example.CinemaTicketServer.Model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import java.lang.String;
 
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -79,4 +76,5 @@ public class Showing {
     public void setSeats(List<Seat> seats) {
         this.seats = seats;
     }
+
 }
