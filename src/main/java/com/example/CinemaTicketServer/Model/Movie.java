@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Locale;
 
 @Getter
@@ -21,7 +22,9 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int movieId;
-    
+
+    @OneToMany(mappedBy = "showing")
+    private List<Showing> showings;
 
 
     @JsonProperty("Title")
