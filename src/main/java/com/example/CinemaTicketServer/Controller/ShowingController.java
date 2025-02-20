@@ -54,7 +54,7 @@ public class ShowingController {
     @PostMapping("/addshowing")
     public ResponseEntity<Showing> addShowing(@RequestBody Showing showing) throws JsonProcessingException {
 
-        showing.setMovie(objectMapper.readValue(movieApi.getByTitle("Suzume"), Movie.class));
+        showing.setMovie(objectMapper.readValue(movieApi.getByTitle(""), Movie.class));
 
         Showing saveShowing = showingService.addShowing(showing);
         return ResponseEntity.ok(saveShowing);
