@@ -21,9 +21,7 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int movieId;
-
-
-
+    
 
 
     @JsonProperty("Title")
@@ -106,6 +104,9 @@ public class Movie {
         return title;
     }
 
+    public String getYear() {
+        return year;
+    }
 
     @Getter
     @Setter
