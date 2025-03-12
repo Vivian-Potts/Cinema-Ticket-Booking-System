@@ -28,8 +28,8 @@ public class ShowingService {
     }
 
     // Get showings for a specific movie
-    public List<Showing> getShowingMovies(String title) {
-        return showingRepo.findByMovieTitle(title);
+    public List<Showing> getShowingMovies(int id) {
+        return showingRepo.findByMovieId(id);
     }
 
 

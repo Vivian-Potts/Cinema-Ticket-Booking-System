@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 
 //@Getter
@@ -15,16 +17,23 @@ public class AdminUsers implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
+    private int id;
     private String username;
     private String password;
 
-    public int getUserId() {
-        return userId;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> roles = new HashSet<>();
+
+    public AdminUsers() {
+        roles.add("ROLE_ADMIN");
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {
