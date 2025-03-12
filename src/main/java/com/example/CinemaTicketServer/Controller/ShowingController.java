@@ -5,6 +5,7 @@ import com.example.CinemaTicketServer.Model.Movie;
 import com.example.CinemaTicketServer.Model.Showing;
 import com.example.CinemaTicketServer.MovieApi;
 import com.example.CinemaTicketServer.Repository.MovieRepository;
+import com.example.CinemaTicketServer.Service.MovieService;
 import com.example.CinemaTicketServer.Service.ShowingService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,6 +31,9 @@ public class ShowingController {
 
     @Autowired
     private ObjectMapper objectMapper;
+
+    @Autowired
+    private MovieService movieService;
 
     @GetMapping("/showings")
     public List<Showing> getShowings() {

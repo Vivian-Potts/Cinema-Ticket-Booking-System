@@ -21,6 +21,8 @@ public class ShowingService {
     private ShowingRepository showingRepo;
     @Autowired
     private MovieRepository movieRepo;
+    @Autowired
+    MovieService movieService;
 
     // Get all showings
     public List<Showing> getShowings() {
@@ -98,14 +100,8 @@ public class ShowingService {
         showing.setMovie(movie);
         Showing savedShowing = showingRepo.save(showing);
 
-        if (savedShowing == null) {
-            throw new RuntimeException("Failed to save the showing");
-        }
-
         return savedShowing;
     }
-
-
 
 
 //    // Update seats after booking

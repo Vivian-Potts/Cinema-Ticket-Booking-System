@@ -52,7 +52,7 @@ public class MovieApi {
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println("Error when referencing API");
             return null;
         }
 

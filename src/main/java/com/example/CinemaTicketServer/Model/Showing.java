@@ -2,6 +2,7 @@ package com.example.CinemaTicketServer.Model;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
 import java.util.List;
 
@@ -13,17 +14,17 @@ public class Showing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @ManyToOne
-    @JoinColumn(name = "movieId")
-    private Movie movie;
-
 
     private int screenNumber;
+
     private OffsetDateTime timeOfStart;
     private OffsetDateTime timeOfFinish;
 
     @OneToMany(mappedBy = "showing")
     private List<Seat> seats;
+
+    @ManyToOne(targetEntity = Movie.class)
+    private Movie movie;
 
 //    public Showing(){
 //        for(int i = 0; i < 200; i++){

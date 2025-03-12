@@ -3,17 +3,14 @@ package com.example.CinemaTicketServer.Service;
 import com.example.CinemaTicketServer.Model.Movie;
 import com.example.CinemaTicketServer.MovieApi;
 import com.example.CinemaTicketServer.Repository.MovieRepository;
-import com.example.CinemaTicketServer.StringCapitaliser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.hibernate.type.descriptor.java.CharacterArrayJavaType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-
 
 
 @Service
@@ -33,15 +30,13 @@ public class MovieService {
         movieRepo.save(movie);
     }
 
-    public List<Movie> getMovie(String name) throws JsonProcessingException {
+    public ArrayList<Movie> getMovie(String name) throws JsonProcessingException {
 
+        ArrayList<Movie> results = (ArrayList<Movie>) movieRepo.findByTitleIgnoreCase(name);
 
-
-        name = StringCapitaliser.capitaliseString(name);
-
-        List<Movie> results = movieRepo.findByTitleIgnoreCase(name);
         if (results.isEmpty()){
-            List<Movie>apiResult = Collections.singletonList(objectMapper.readValue(movieApi.getByTitle(name), Movie.class));
+            ArrayList<Movie> apiResult = new ArrayList<>();
+            apiResult.add(objectMapper.readValue(movieApi.getByTitle(name), Movie.class));
             System.out.println("Pulled from api: "+apiResult.getFirst().getTitle());
             if (apiResult.getFirst().getTitle() != null) {
                 saveMovie(apiResult.getFirst());
@@ -52,6 +47,28 @@ public class MovieService {
         return results;
 
 
+    }
+    public List<Movie> getMovieInDatabase(String name){
+        return movieRepo.findByTitleIgnoreCase(name);
+    }
+
+    public ArrayList<String> getMoviePosterArt(String title) throws JsonProcessingException {
+
+        System.out.println("Getting movie: "+title);
+
+        ArrayList<Movie> movies = getMovie(title);
+
+        ArrayList<String> posterArts = new ArrayList<String>();
+
+        if(movies.isEmpty()){
+            return posterArts;
+        }
+
+        for (Movie movie: movies){
+            posterArts.add(movie.getPoster());
+        }
+
+        return posterArts;
     }
 
 

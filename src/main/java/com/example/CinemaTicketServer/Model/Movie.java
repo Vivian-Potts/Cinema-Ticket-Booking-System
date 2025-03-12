@@ -10,8 +10,11 @@ import lombok.Setter;
 import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,9 +24,6 @@ public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
-
-    @OneToMany(mappedBy = "id")
-    private List<Showing> showings;
 
     @JsonProperty("Title")
     private String title;
@@ -107,6 +107,10 @@ public class Movie {
 
     public String getYear() {
         return year;
+    }
+
+    public String getPoster(){
+        return poster;
     }
 
     @Getter

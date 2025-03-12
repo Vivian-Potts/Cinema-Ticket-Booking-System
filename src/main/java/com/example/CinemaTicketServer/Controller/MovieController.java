@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-public class Controller {
+public class MovieController {
 
     @Autowired
     private MovieService movieService;
@@ -30,5 +30,10 @@ public class Controller {
     public List<Movie> showExampleMovie(@RequestParam String title) throws JsonProcessingException {
         System.out.println("Querying: "+title);
         return movieService.getMovie(title);
+    }
+    @GetMapping("/getPoster")
+    @ResponseBody
+    public ArrayList<String> getPoster(@RequestParam String title) throws JsonProcessingException {
+        return movieService.getMoviePosterArt(title);
     }
 }
