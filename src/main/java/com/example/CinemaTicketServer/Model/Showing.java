@@ -11,7 +11,7 @@ import java.util.List;
 public class Showing {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int showingId;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "movieId")
@@ -31,14 +31,7 @@ public class Showing {
 //        }
 //
 //   }
-
-    public int getShowingId() {
-        return showingId;
-    }
-
-    public void setShowingId(int showingId) {
-        this.showingId = showingId;
-    }
+    
 
     public Movie getMovie() {
         return movie;

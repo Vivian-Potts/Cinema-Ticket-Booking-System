@@ -4,10 +4,12 @@ package com.example.CinemaTicketServer.Controller;
 import com.example.CinemaTicketServer.Model.Movie;
 import com.example.CinemaTicketServer.Model.Showing;
 import com.example.CinemaTicketServer.MovieApi;
+import com.example.CinemaTicketServer.Repository.MovieRepository;
 import com.example.CinemaTicketServer.Service.ShowingService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,9 @@ public class ShowingController {
 
     @Autowired
     private ShowingService showingService;
+
+    @Autowired
+    private MovieRepository movieRepository;
 
     @Autowired
     private MovieApi movieApi;
@@ -36,9 +41,9 @@ public class ShowingController {
         return null;
     }
 
-    @GetMapping("/movie/{movieName}")
-    public List<Showing> getShowingMovies(@PathVariable String movieName) {
-        return showingService.getShowingMovies(movieName);
+    @GetMapping("/movie/{id}")
+    public List<Showing> getShowingMovies(@PathVariable int id) {
+        return showingService.getShowingMovies(id);
     }
 
     @PostMapping("/book/{showingId}")
@@ -53,13 +58,28 @@ public class ShowingController {
 
     @PostMapping("/addshowing")
     public ResponseEntity<Showing> addShowing(@RequestBody Showing showing) throws JsonProcessingException {
+        if (showing.getMovie() == null || showing.getMovie().getTitle() == null) {
+            return ResponseEntity.badRequest().body(null);
+        }
 
-        showing.setMovie(objectMapper.readValue(movieApi.getByTitle(""), Movie.class));
+        String title = showing.getMovie().getTitle();
+        Movie movie = movieRepository.findByTitle(title);
 
-        Showing saveShowing = showingService.addShowing(showing);
-        return ResponseEntity.ok(saveShowing);
+        if (movie == null) {
+            movie = objectMapper.readValue(movieApi.getByTitle(title), Movie.class);
+            if (movie == null) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+            }
+            movieRepository.save(movie);
+        }
 
+        showing.setMovie(movie);
+        Showing savedShowing = showingService.addShowing(showing);
+
+        return ResponseEntity.ok(savedShowing);
     }
+
+
 }
 
 

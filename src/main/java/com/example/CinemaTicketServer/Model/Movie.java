@@ -15,17 +15,15 @@ import java.util.Locale;
 
 @Getter
 @Setter
-@Component
 @Entity
 public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int movieId;
+    int id;
 
-    @OneToMany(mappedBy = "showing")
+    @OneToMany(mappedBy = "id")
     private List<Showing> showings;
-
 
     @JsonProperty("Title")
     private String title;
