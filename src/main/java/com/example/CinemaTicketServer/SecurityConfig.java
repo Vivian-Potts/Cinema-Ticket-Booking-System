@@ -32,7 +32,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/book/{showingId}", "/movie/{id}", "/showings", "/getAtDay").permitAll()  // Public endpoints
                         .requestMatchers("/users/{username}", "/adduser", "/addshowing").hasRole("ADMIN")  // Restricted to admin
-                        .anyRequest().authenticated()  // Require authentication for other requests
+                        .anyRequest().permitAll()  // Require authentication for other requests
                 )
                 .formLogin(withDefaults())  // Default form login
                 .logout(withDefaults());  // Default logout configuration
