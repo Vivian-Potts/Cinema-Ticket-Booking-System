@@ -23,26 +23,25 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();  // BCrypt encoder for password matching
+        return new BCryptPasswordEncoder(); // Use BCrypt for password encoding
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/book/{showingId}", "/movie/{id}", "/showings", "/getAtDay").permitAll()  // Public endpoints
-                        .requestMatchers("/users/{username}", "/adduser", "/addshowing").hasRole("ADMIN")  // Restricted to admin
-                        .anyRequest().permitAll()  // Require authentication for other requests
+                        .requestMatchers("/book/{showingId}", "/movie/{id}", "/showings", "/getAtDay", "/get").permitAll() // Public endpoints
+                        .requestMatchers("/users/{username}", "/addshowing", "/add").hasRole("ADMIN") // Restricted to ADMIN
+                        .anyRequest().authenticated() // All other requests require authentication
                 )
-                .formLogin(withDefaults())  // Default form login
-                .logout(withDefaults());  // Default logout configuration
+                .formLogin(withDefaults()) // Enable form login
+                .logout(withDefaults()); // Enable logout
 
         return http.build();
     }
 
     @Bean
-    public AdminUserDetailService adminUserDetailService(PasswordEncoder passwordEncoder) {
-        return new AdminUserDetailService(auRepo, passwordEncoder);  // Pass passwordEncoder to AdminUserDetailService
+    public AdminUserDetailService adminUserDetailService() {
+        return new AdminUserDetailService(auRepo, passwordEncoder());
     }
 }
-
