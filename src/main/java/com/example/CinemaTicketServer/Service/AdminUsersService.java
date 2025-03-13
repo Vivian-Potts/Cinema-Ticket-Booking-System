@@ -12,7 +12,6 @@ public class AdminUsersService {
 
     @Autowired
     private AdminUsersRepository auRepo;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -29,7 +28,9 @@ public class AdminUsersService {
         AdminUsers user = new AdminUsers();
         user.setUsername(username);
         user.setPassword(hashedPass);
-        return auRepo.save(user);
+        AdminUsers saveUser = auRepo.save(user);
+        System.out.println("Saved User");
+        return saveUser;
     }
 
     public boolean validateUser(String username, String password) {
