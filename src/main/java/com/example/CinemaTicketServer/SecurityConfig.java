@@ -32,7 +32,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/book/{showingId}", "/movie/{id}", "/showings", "/getAtDay", "/get").permitAll() // Public endpoints
-                        .requestMatchers("/users/{username}", "/addshowing", "/add").hasRole("ADMIN") // Restricted to ADMIN
+                        .requestMatchers("/users/{username}", "/addshowing").hasRole("ADMIN") // Restricted to ADMIN
                         .anyRequest().authenticated() // All other requests require authentication
                 )
                 .httpBasic(Customizer.withDefaults()) // Basic Authentication
