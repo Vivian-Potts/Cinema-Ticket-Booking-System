@@ -15,9 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -45,15 +42,13 @@ public class ShowingController {
         return showingService.getShowings();
     }
 
-//    This is likely unneeded
-//    @GetMapping("/getAtDay")
-//    @ResponseBody
-//    public ArrayList<Showing> getShowingsByDay(@PathVariable OffsetDateTime date){
-//        return showingService.getAllAfterTime(date);
-//    }
+    @GetMapping("/getAtDay")
+    public List<Showing> getShowingsByDay(@PathVariable OffsetDateTime date){
+        return null;
+    }
 
-    @GetMapping("/movie")
-    public List<Showing> getShowingMovies(@RequestParam int id) {
+    @GetMapping("/movie/{id}")
+    public List<Showing> getShowingMovies(@PathVariable int id) {
         return showingService.getShowingMovies(id);
     }
 
@@ -67,17 +62,7 @@ public class ShowingController {
         }
     }
 
-    @PostMapping("/reallyAddShowing")
-
-    public ResponseEntity<String> reallyAddShowing(@RequestParam int screenNumber, @RequestParam String dateOfStart, @RequestParam String dateOfEnd, @RequestParam int movieId, @RequestParam String bookingType){
-
-        showingService.addShowings(screenNumber, dateOfStart, dateOfEnd, movieId, bookingType);
-
-        return null;
-    }
-
-
-    @PostMapping("/addShowing")
+    @PostMapping("/addshowing")
     public ResponseEntity<Showing> addShowing(@RequestBody Showing showing) throws JsonProcessingException {
         if (showing.getMovie() == null || showing.getMovie().getTitle() == null) {
             return ResponseEntity.badRequest().body(null);
@@ -98,11 +83,6 @@ public class ShowingController {
         Showing savedShowing = showingService.addShowing(showing);
 
         return ResponseEntity.ok(savedShowing);
-    }
-
-    @DeleteMapping("/deleteById")
-    void deleteById(@RequestParam int id){
-        showingService.deleteById(id);
     }
 
 
