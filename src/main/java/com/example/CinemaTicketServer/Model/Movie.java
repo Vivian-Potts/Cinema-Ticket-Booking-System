@@ -113,6 +113,10 @@ public class Movie {
         return poster;
     }
 
+    public String getRuntime(){
+        return runtime;
+    }
+
     @Getter
     @Setter
     public static class Rating {

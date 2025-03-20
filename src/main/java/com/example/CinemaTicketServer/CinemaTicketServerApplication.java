@@ -16,10 +16,5 @@ import java.sql.SQLException;
 public class CinemaTicketServerApplication {
 	public static void main(String[] args) throws SQLException, IOException {
 		ApplicationContext context = SpringApplication.run(CinemaTicketServerApplication.class, args);
-
-//		BCryptPasswordEncoder pass = new BCryptPasswordEncoder();
-//		String p = "password";
-//		String h = pass.encode(p);
-//		System.out.println("Hash pass: " + h);
 	}
 }

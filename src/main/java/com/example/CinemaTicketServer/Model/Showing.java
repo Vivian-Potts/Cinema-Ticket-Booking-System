@@ -32,7 +32,16 @@ public class Showing {
 //        }
 //
 //   }
-    
+
+    public Showing(int screenNumber, OffsetDateTime timeOfStart, OffsetDateTime timeOfFinish, Movie movie){
+        this.screenNumber = screenNumber;
+        this.timeOfStart = timeOfStart;
+        this.timeOfFinish = timeOfFinish;
+        this.movie = movie;
+    }
+
+    public Showing(){}
+
 
     public Movie getMovie() {
         return movie;

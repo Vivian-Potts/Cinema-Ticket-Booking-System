@@ -54,8 +54,6 @@ public class MovieService {
 
     public ArrayList<String> getMoviePosterArt(String title) throws JsonProcessingException {
 
-        System.out.println("Getting movie: "+title);
-
         ArrayList<Movie> movies = getMovie(title);
 
         ArrayList<String> posterArts = new ArrayList<String>();

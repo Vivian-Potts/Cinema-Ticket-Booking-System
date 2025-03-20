@@ -1,18 +1,18 @@
 package com.example.CinemaTicketServer.Service;
 
-import com.example.CinemaTicketServer.Model.AdminUsers;
 import com.example.CinemaTicketServer.Model.Movie;
 import com.example.CinemaTicketServer.Model.Showing;
 import com.example.CinemaTicketServer.Repository.MovieRepository;
 import com.example.CinemaTicketServer.Repository.ShowingRepository;
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 
 @Service
@@ -102,6 +102,67 @@ public class ShowingService {
 
         return savedShowing;
     }
+
+    public void addShowings(int screenNumber, String dateOfStart, String dateOfEnd, int movieId, String bookingType){
+
+        ArrayList<Showing> showings = new ArrayList<Showing>();
+
+        Movie movie = movieRepo.getReferenceById(movieId);
+
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ssXXX");
+
+        OffsetDateTime startDate = OffsetDateTime.parse(dateOfStart+"+00:00", dateTimeFormatter);
+        OffsetDateTime endDate = OffsetDateTime.parse(dateOfEnd+"+00:00", dateTimeFormatter);
+
+        //All booking have 5 mins added to them to account for seconds being absent and for maintenance
+        Long movieLength =  Long.parseLong(movie.getRuntime().replace(" min",""))+5;
+
+
+
+        if (bookingType.equalsIgnoreCase("once")){
+
+            showings.add(new Showing(screenNumber, startDate, startDate.plusMinutes(movieLength) ,movie));
+
+        } else if (bookingType.equalsIgnoreCase("daily")) {
+            OffsetDateTime cursor = startDate;
+            Showing dummyShowing = new Showing(screenNumber, startDate, endDate, movie);
+
+            while(cursor.isBefore(endDate)){
+                System.out.println("Added new object");
+                showings.add(new Showing(screenNumber, cursor, cursor.plusMinutes(movieLength), movie));
+                System.out.println(dummyShowing.getTimeOfStart());
+                cursor = cursor.plusDays(1);
+            }
+        }
+
+        System.out.println(showings.size());
+
+//        for(int i = 0; i < showings.size(); i++){
+//            showingRepo.save(showings.get(i));
+//        }
+
+        for (Showing qwerty : showings){
+            System.out.println("Attempted showing save"+qwerty.getTimeOfStart());
+
+            showingRepo.save(qwerty);
+        }
+
+        //showingRepo.saveAll(showings);
+
+
+
+    }
+
+
+    public ArrayList<Showing> getAllAfterTime(OffsetDateTime time){
+        return (ArrayList<Showing>) showingRepo.findByTimeOfStartGreaterThanEqual(time);
+        //return null;
+    }
+
+    public void deleteById(int id){
+        showingRepo.deleteById(id);
+    }
+
 
 
 //    // Update seats after booking
