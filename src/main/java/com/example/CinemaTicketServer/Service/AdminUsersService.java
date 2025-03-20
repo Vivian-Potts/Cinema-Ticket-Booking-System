@@ -37,6 +37,10 @@ public class AdminUsersService {
         AdminUsers user = auRepo.findByUsername(username);
         return user != null && passwordEncoder.matches(password, user.getPassword());
     }
+
+    public AdminUsers findUserId(int id) {
+        return auRepo.findById(id);
+    }
 }
 
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin/users")
+@RequestMapping("/admin")
 public class AdminUserController {
 
     @Autowired
@@ -28,6 +28,13 @@ public class AdminUserController {
     @PreAuthorize("hasRole('ADMIN')")
     public AdminUsers findUser(@PathVariable String username) {
         return auService.findUser(username);
+    }
+
+    // Find a specific user by id
+    @GetMapping("/id/{id}")
+//    @PreAuthorize("hasRole('ADMIN')")
+    public AdminUsers findUserId(@PathVariable int id) {
+        return auService.findUserId(id);
     }
 
     // Add a new user (admin only)

@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @EnableWebSecurity
@@ -29,18 +30,27 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/book/{showingId}", "/movie/{id}", "/showings", "/getAtDay", "/get").permitAll() // Public endpoints
-                        .requestMatchers("/users/{username}", "/addshowing").hasRole("ADMIN") // Restricted to ADMIN
-                        .anyRequest().authenticated() // All other requests require authentication
+                        .requestMatchers(new AntPathRequestMatcher("/book/**"),
+                                new AntPathRequestMatcher("/movie/**"),
+                                new AntPathRequestMatcher("/showings"),
+                                new AntPathRequestMatcher("/getAtDay"),
+                                new AntPathRequestMatcher("/get"),
+                                new AntPathRequestMatcher("/id/**"),
+                                new AntPathRequestMatcher("/error"))
+                        .permitAll()
+                        .requestMatchers("/users/*", "/addshowing").hasRole("ADMIN")
+                        .anyRequest().authenticated()
                 )
-                .httpBasic(Customizer.withDefaults()) // Basic Authentication
-                .formLogin(Customizer.withDefaults()) // Default form login
-                .logout(Customizer.withDefaults()) // Enable logout
+                .httpBasic(Customizer.withDefaults())
+                .formLogin(Customizer.withDefaults())
+                .logout(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable); // Disable CSRF
 
         return http.build();
+
     }
 
 

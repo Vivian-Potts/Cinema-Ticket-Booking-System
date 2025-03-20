@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import java.time.OffsetDateTime;
 import java.util.List;
 
+
 @RestController
+@RequestMapping("/showing")
 public class ShowingController {
 
     @Autowired
