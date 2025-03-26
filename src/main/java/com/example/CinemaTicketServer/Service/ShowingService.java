@@ -12,7 +12,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 
 
 @Service
@@ -35,33 +34,30 @@ public class ShowingService {
     }
 
 
-    // Method for booking seats
-    public void saveBooking(int id, List<String> seats) {
-
-        Showing showing = showingRepo.findById(id);
-        if (showing == null) {
-            throw new IllegalArgumentException("Showing not found");
-        }
-        validateBooking(showing, seats);
-
-        List<String> bookedSeats = getBookedSeats(showing);
-        checkSeats(seats, bookedSeats);
-
-        bookedSeats.addAll(seats);
-        //updateSeats(showing, bookedSeats);
-    }
+//    // Method for booking seats
+//    public void saveBooking(int id) {
+//
+//        Showing showing = showingRepo.findById(id);
+//        if (showing == null) {
+//            throw new IllegalArgumentException("Showing not found");
+//        }
+//        validateBooking(showing);
+//
+//        List<String> bookedSeats = getBookedSeats(showing);
+//        //updateSeats(showing, bookedSeats);
+//    }
 
 
 
-    // Ensure booking is valid
-    private void validateBooking(Showing showing, List<String> seats) {
-        if (showing == null) {
-            throw new IllegalArgumentException("Showing cannot be null");
-        }
-        if (seats == null || seats.isEmpty()) {
-            throw new IllegalArgumentException("Seats cannot be null or empty");
-        }
-    }
+//    // Ensure booking is valid
+//    private void validateBooking(Showing showing) {
+//        if (showing == null) {
+//            throw new IllegalArgumentException("Showing cannot be null");
+//        }
+//        if (seats == null || seats.isEmpty()) {
+//            throw new IllegalArgumentException("Seats cannot be null or empty");
+//        }
+//    }
 
     // Retrieve booked seats
     private List<String> getBookedSeats(Showing showing) {
@@ -159,8 +155,8 @@ public class ShowingService {
         //return null;
     }
 
-    public void deleteById(int id){
-        showingRepo.deleteById(id);
+    public Showing deleteById(int id){
+        return showingRepo.deleteById(id);
     }
 
 
