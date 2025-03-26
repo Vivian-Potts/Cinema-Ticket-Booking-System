@@ -99,7 +99,7 @@ public class ShowingService {
         return savedShowing;
     }
 
-    public void addShowings(int screenNumber, String dateOfStart, String dateOfEnd, int movieId, String bookingType){
+    public Boolean addShowings(int screenNumber, String dateOfStart, String dateOfEnd, int movieId, String bookingType){
 
         ArrayList<Showing> showings = new ArrayList<Showing>();
 
@@ -113,40 +113,57 @@ public class ShowingService {
         //All booking have 5 mins added to them to account for seconds being absent and for maintenance
         Long movieLength =  Long.parseLong(movie.getRuntime().replace(" min",""))+5;
 
+//        int days = -1;
 
 
-        if (bookingType.equalsIgnoreCase("once")){
+        if (bookingType.equalsIgnoreCase("Once")){
 
             showings.add(new Showing(screenNumber, startDate, startDate.plusMinutes(movieLength) ,movie));
 
-        } else if (bookingType.equalsIgnoreCase("daily")) {
+        }else {
+
             OffsetDateTime cursor = startDate;
             Showing dummyShowing = new Showing(screenNumber, startDate, endDate, movie);
 
-            while(cursor.isBefore(endDate)){
-                System.out.println("Added new object");
-                showings.add(new Showing(screenNumber, cursor, cursor.plusMinutes(movieLength), movie));
-                System.out.println(dummyShowing.getTimeOfStart());
-                cursor = cursor.plusDays(1);
+            if (bookingType.equalsIgnoreCase("Monthly")) {
+                while (cursor.isBefore(endDate)) {
+                    System.out.println("Added new object");
+                    showings.add(new Showing(screenNumber, cursor, cursor.plusMinutes(movieLength), movie));
+                    System.out.println(dummyShowing.getTimeOfStart());
+                    cursor = cursor.plusMonths(1);
+                }
+            }
+
+            int days = -1;
+
+            if (bookingType.equalsIgnoreCase("Daily")) {
+                days = 1;
+            } else if (bookingType.equalsIgnoreCase("Weekly")) {
+                days = 7;
+            }
+
+            if(days != -1){
+                while (cursor.isBefore(endDate)) {
+                    System.out.println("Added new object");
+                    showings.add(new Showing(screenNumber, cursor, cursor.plusMinutes(movieLength), movie));
+                    System.out.println(dummyShowing.getTimeOfStart());
+                    cursor = cursor.plusDays(days);
+                }
             }
         }
 
-        System.out.println(showings.size());
-
-//        for(int i = 0; i < showings.size(); i++){
-//            showingRepo.save(showings.get(i));
-//        }
-
-        for (Showing qwerty : showings){
-            System.out.println("Attempted showing save"+qwerty.getTimeOfStart());
-
-            showingRepo.save(qwerty);
+        if (showings.isEmpty()){
+            return Boolean.FALSE;
         }
 
-        //showingRepo.saveAll(showings);
+        for (Showing showing : showings){
+            showingRepo.save(showing);
+        }
+
+//        showingRepo.saveAll(showings);
 
 
-
+        return Boolean.TRUE;
     }
 
 
