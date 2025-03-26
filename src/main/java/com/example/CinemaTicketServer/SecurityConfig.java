@@ -6,14 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @EnableWebSecurity
@@ -33,16 +31,18 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(new AntPathRequestMatcher("/book/**"),
-                                new AntPathRequestMatcher("/movie/**"),
-                                new AntPathRequestMatcher("/showings"),
-                                new AntPathRequestMatcher("/getAtDay"),
-                                new AntPathRequestMatcher("/get"),
-                                new AntPathRequestMatcher("/id/**"),
-                                new AntPathRequestMatcher("/error"))
-                        .permitAll()
-                        .requestMatchers("/users/*", "/addshowing").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                                .requestMatchers("/admin/**").hasRole("ADMIN") //Include all admin only
+
+                                .requestMatchers("/").permitAll()
+                                .requestMatchers("/showings").permitAll()
+                                .requestMatchers("/get", "/getPoster").permitAll()
+                                .requestMatchers("/movie/**").permitAll()
+                                .requestMatchers("/book/**").permitAll() //Doesn't Work
+
+                                .anyRequest().authenticated()
+
+
+//
                 )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())

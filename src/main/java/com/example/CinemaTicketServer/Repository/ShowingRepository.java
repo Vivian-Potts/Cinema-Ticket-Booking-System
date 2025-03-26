@@ -16,6 +16,8 @@ public interface ShowingRepository extends JpaRepository<Showing, Integer> {
     List<Showing> findByMovieId(int id);
 
     List<Showing> findByTimeOfStartGreaterThanEqual(OffsetDateTime dateTime);
+
+    Showing deleteById(int id);
 }
 
 
