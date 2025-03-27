@@ -69,7 +69,6 @@ public class ShowingService {
 
 
         if (bookingType.equalsIgnoreCase("Once")) {
-
             showings.add(new Showing(screenNumber, startDate, startDate.plusMinutes(movieLength), movie));
 
         } else {

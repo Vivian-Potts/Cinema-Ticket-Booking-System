@@ -28,8 +28,8 @@ public class SeatController {
 
     }
 
-    @GetMapping("/getSeats")
-    public ArrayList<Seat> getSeatsByShowingId(@RequestParam int id){
+    @GetMapping("/getSeats/{id}")
+    public ArrayList<Seat> getSeatsByShowingId(@PathVariable int id){
         return seatService.getByShowingId(id);
     }
 

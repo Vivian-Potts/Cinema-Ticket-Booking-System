@@ -40,6 +40,7 @@ public class SecurityConfig {
                                 .requestMatchers("/get", "/getPoster").permitAll()
                                 .requestMatchers("/movie/**").permitAll()
                                 .requestMatchers("/book/**").permitAll()
+                                .requestMatchers("/getSeats/**").permitAll()
 
                                 .anyRequest().authenticated()
 
