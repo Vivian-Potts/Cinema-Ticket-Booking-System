@@ -126,11 +126,8 @@ public class ShowingService {
             Showing dummyShowing = new Showing(screenNumber, startDate, endDate, movie);
 
             if (bookingType.equalsIgnoreCase("Monthly")) {
-                while (cursor.isBefore(endDate)) {
-                    System.out.println("Added new object");
-                    showings.add(new Showing(screenNumber, cursor, cursor.plusMinutes(movieLength), movie));
-                    System.out.println(dummyShowing.getTimeOfStart());
-                    cursor = cursor.plusMonths(1);
+                for (int i = 0; i < 12; i++) {
+                    showings.add(new Showing(screenNumber, startDate.plusMonths(i), cursor.plusMonths(i).plusMinutes(movieLength), movie));
                 }
             }
 
