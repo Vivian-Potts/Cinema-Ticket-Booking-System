@@ -72,38 +72,40 @@ public class AdminUserController {
     }
 
     //Add Showing
-    @PostMapping("/reallyAddShowing")
+    @PostMapping("/addShowing")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> reallyAddShowing(@RequestParam int screenNumber, @RequestParam String dateOfStart, @RequestParam String dateOfEnd, @RequestParam int movieId, @RequestParam String bookingType){
 
-        showingService.addShowings(screenNumber, dateOfStart, dateOfEnd, movieId, bookingType);
+        if (showingService.addShowings(screenNumber, dateOfStart, dateOfEnd, movieId, bookingType)){
+            return ResponseEntity.ok("Showing successfully added");
+        }
+        return ResponseEntity.badRequest().body("Invalid booking type. Booking type must be one of \"Once\",\"Daily\",\"Weekly\", or \"Monthly\"");
 
-        return null;
     }
 
     //May be deleted
-    @PostMapping("/addShowing")
-    public ResponseEntity<Showing> addShowing(@RequestBody Showing showing) throws JsonProcessingException {
-        if (showing.getMovie() == null || showing.getMovie().getTitle() == null) {
-            return ResponseEntity.badRequest().body(null);
-        }
-
-        String title = showing.getMovie().getTitle();
-        Movie movie = movieRepository.findByTitle(title);
-
-        if (movie == null) {
-            movie = objectMapper.readValue(movieApi.getByTitle(title), Movie.class);
-            if (movie == null) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-            }
-            movieRepository.save(movie);
-        }
-
-        showing.setMovie(movie);
-        Showing savedShowing = showingService.addShowing(showing);
-
-        return ResponseEntity.ok(savedShowing);
-    }
+//    @PostMapping("/addShowing")
+//    public ResponseEntity<Showing> addShowing(@RequestBody Showing showing) throws JsonProcessingException {
+//        if (showing.getMovie() == null || showing.getMovie().getTitle() == null) {
+//            return ResponseEntity.badRequest().body(null);
+//        }
+//
+//        String title = showing.getMovie().getTitle();
+//        Movie movie = movieRepository.findByTitle(title);
+//
+//        if (movie == null) {
+//            movie = objectMapper.readValue(movieApi.getByTitle(title), Movie.class);
+//            if (movie == null) {
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+//            }
+//            movieRepository.save(movie);
+//        }
+//
+//        showing.setMovie(movie);
+//        Showing savedShowing = showingService.addShowing(showing);
+//
+//        return ResponseEntity.ok(savedShowing);
+//    }
 
     //Delete showing
     @DeleteMapping("/delete/{id}")
