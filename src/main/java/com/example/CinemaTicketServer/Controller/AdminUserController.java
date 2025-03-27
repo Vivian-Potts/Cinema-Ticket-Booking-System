@@ -1,7 +1,6 @@
 package com.example.CinemaTicketServer.Controller;
 
 import com.example.CinemaTicketServer.Model.AdminUsers;
-import com.example.CinemaTicketServer.Model.Movie;
 import com.example.CinemaTicketServer.Model.Showing;
 import com.example.CinemaTicketServer.MovieApi;
 import com.example.CinemaTicketServer.Repository.MovieRepository;
@@ -9,10 +8,8 @@ import com.example.CinemaTicketServer.Repository.ShowingRepository;
 import com.example.CinemaTicketServer.Service.AdminUsersService;
 import com.example.CinemaTicketServer.Service.MovieService;
 import com.example.CinemaTicketServer.Service.ShowingService;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -82,30 +79,6 @@ public class AdminUserController {
         return ResponseEntity.badRequest().body("Invalid booking type. Booking type must be one of \"Once\",\"Daily\",\"Weekly\", or \"Monthly\"");
 
     }
-
-    //May be deleted
-//    @PostMapping("/addShowing")
-//    public ResponseEntity<Showing> addShowing(@RequestBody Showing showing) throws JsonProcessingException {
-//        if (showing.getMovie() == null || showing.getMovie().getTitle() == null) {
-//            return ResponseEntity.badRequest().body(null);
-//        }
-//
-//        String title = showing.getMovie().getTitle();
-//        Movie movie = movieRepository.findByTitle(title);
-//
-//        if (movie == null) {
-//            movie = objectMapper.readValue(movieApi.getByTitle(title), Movie.class);
-//            if (movie == null) {
-//                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-//            }
-//            movieRepository.save(movie);
-//        }
-//
-//        showing.setMovie(movie);
-//        Showing savedShowing = showingService.addShowing(showing);
-//
-//        return ResponseEntity.ok(savedShowing);
-//    }
 
     //Delete showing
     @DeleteMapping("/delete/{id}")

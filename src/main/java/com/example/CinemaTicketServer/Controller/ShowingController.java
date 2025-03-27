@@ -21,14 +21,6 @@ public class ShowingController {
         return showingService.getShowings();
     }
 
-//    This is likely unneeded
-//    @GetMapping("/getAtDay")
-//    @ResponseBody
-//    public ArrayList<Showing> getShowingsByDay(@PathVariable OffsetDateTime date){
-//        return showingService.getAllAfterTime(date);
-//    }
-
-
 
     //Get Movie by ID
     @GetMapping("/movie/{id}")
@@ -36,17 +28,6 @@ public class ShowingController {
         return showingService.getShowingMovies(id);
     }
 
-
-//    //Book showing by ID
-//    @PostMapping("/book")
-//    public ResponseEntity<String> bookSeats(@PathVariable int id) {
-//        try {
-//            showingService.saveBooking(id);
-//            return ResponseEntity.ok("Seats booked successfully");
-//        } catch (Exception e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
 
 
 }
