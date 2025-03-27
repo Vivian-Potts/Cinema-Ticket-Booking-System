@@ -11,11 +11,11 @@ public class SeatService {
     SeatRepository seatRepository;
     ShowingRepository showingRepository;
 
-    public int bookSeat(int seatNumber, int showingId){
+    public int bookSeat(int seatNumber, int id){
 
         if (seatNumber > 300 || seatNumber < 1) {
             try {
-                Seat seat = new Seat(seatNumber, showingRepository.findById(showingId));
+                Seat seat = new Seat(seatNumber, showingRepository.findById(id));
                 seatRepository.save(seat);
                 return 0;
             } catch (Exception e) {
