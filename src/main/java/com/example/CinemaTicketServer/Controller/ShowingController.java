@@ -6,6 +6,8 @@ import com.example.CinemaTicketServer.Service.ShowingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -24,8 +26,8 @@ public class ShowingController {
 
     //Get Movie by ID
     @GetMapping("/movie/{id}")
-    public List<Showing> getShowingMovies(@PathVariable int id) {
-        return showingService.getShowingMovies(id);
+    public ArrayList<Showing> getShowingMovies(@PathVariable int id) {
+        return (ArrayList<Showing>) showingService.getShowingMovies(id);
     }
 
 

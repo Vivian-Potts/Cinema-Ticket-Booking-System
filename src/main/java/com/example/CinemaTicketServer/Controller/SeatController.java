@@ -1,13 +1,14 @@
 package com.example.CinemaTicketServer.Controller;
 
 
+import com.example.CinemaTicketServer.Model.Seat;
+import com.example.CinemaTicketServer.Model.Showing;
 import com.example.CinemaTicketServer.Service.SeatService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
 
 @RestController
 public class SeatController {
@@ -20,11 +21,16 @@ public class SeatController {
 
         return switch (seatService.bookSeat(seatNumber, id)) {
             case (0) -> ResponseEntity.ok("Seat Booked");
-            case (1) -> ResponseEntity.badRequest().body("Movie id could not be found in database");
+            case (1) -> ResponseEntity.badRequest().body("Showing id could not be found in database");
             case (2) -> ResponseEntity.badRequest().body("Seats range from 1 to 300");
             default -> ResponseEntity.badRequest().body("Unknown error");
         };
 
+    }
+
+    @GetMapping("/getSeats")
+    public ArrayList<Seat> getSeatsByShowingId(@RequestParam int id){
+        return seatService.getByShowingId(id);
     }
 
 }
