@@ -15,9 +15,9 @@ public class SeatController {
     SeatService seatService;
 
     @PostMapping("/book")
-    public ResponseEntity<String> bookSeat(@PathVariable int seatNumber, @PathVariable int movieId){
+    public ResponseEntity<String> bookSeat(@PathVariable int seatNumber, @PathVariable int showingId){
 
-        return switch (seatService.bookSeat(seatNumber, movieId)) {
+        return switch (seatService.bookSeat(seatNumber, showingId)) {
             case (0) -> ResponseEntity.ok("Seat Booked");
             case (1) -> ResponseEntity.badRequest().body("Movie id could not be found in database");
             case (2) -> ResponseEntity.badRequest().body("Seats range from 1 to 300");
