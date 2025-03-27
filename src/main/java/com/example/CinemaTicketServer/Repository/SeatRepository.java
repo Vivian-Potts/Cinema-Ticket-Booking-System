@@ -9,5 +9,5 @@ import java.util.ArrayList;
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Integer> {
 
-    public ArrayList<Seat> getByShowing(int id);
+    public ArrayList<Seat> getByShowingId(int id);
 }
