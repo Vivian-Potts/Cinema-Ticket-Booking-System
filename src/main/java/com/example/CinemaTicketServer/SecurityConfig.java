@@ -31,13 +31,15 @@ public class SecurityConfig {
 
         http
                 .authorizeHttpRequests(auth -> auth
-                                .requestMatchers("/admin/**").hasRole("ADMIN") //Include all admin only
+                                //Include all admin only
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
 
+                                //Public endpoints
                                 .requestMatchers("/").permitAll()
                                 .requestMatchers("/showings").permitAll()
                                 .requestMatchers("/get", "/getPoster").permitAll()
                                 .requestMatchers("/movie/**").permitAll()
-                                .requestMatchers("/book/**").permitAll() //Doesn't Work
+                                .requestMatchers("/book/**").permitAll()
 
                                 .anyRequest().authenticated()
 
@@ -47,7 +49,7 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
                 .logout(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable); // Disable CSRF
+                .csrf(AbstractHttpConfigurer::disable); // Disable CSRF - Change after
 
         return http.build();
 

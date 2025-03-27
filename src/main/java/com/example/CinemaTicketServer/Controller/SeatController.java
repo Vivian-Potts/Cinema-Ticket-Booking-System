@@ -14,7 +14,7 @@ public class SeatController {
     @Autowired
     SeatService seatService;
 
-    @PostMapping
+    @PostMapping("/book")
     public ResponseEntity<String> bookSeat(@PathVariable int seatNumber, @PathVariable int movieId){
 
         return switch (seatService.bookSeat(seatNumber, movieId)) {
