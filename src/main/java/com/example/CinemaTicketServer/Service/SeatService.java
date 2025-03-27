@@ -9,11 +9,11 @@ public class SeatService {
     SeatRepository seatRepository;
     ShowingRepository showingRepository;
 
-    public int bookSeat(int seatNumber, int movieId){
+    public int bookSeat(int seatNumber, int showingId){
 
-        if (movieId > 300 || movieId < 1) {
+        if (seatNumber > 300 || seatNumber < 1) {
             try {
-                Seat seat = new Seat(seatNumber, showingRepository.findById(movieId));
+                Seat seat = new Seat(seatNumber, showingRepository.findById(showingId));
                 seatRepository.save(seat);
                 return 0;
             } catch (Exception e) {
