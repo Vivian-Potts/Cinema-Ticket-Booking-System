@@ -21,6 +21,14 @@ public class Seat {
         this.showing = showing;
     }
 
+    public Showing getShowing() {
+        return showing;
+    }
+
+    public int getSeatNumber() {
+        return seatNumber;
+    }
+
     public Seat(){}
 
 }

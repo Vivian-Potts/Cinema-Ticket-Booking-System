@@ -32,6 +32,7 @@ public class SeatService {
     }
 
     public ArrayList<Seat> getByShowingId(int id){
+        
         return seatRepository.getByShowingId(id);
     }
 
