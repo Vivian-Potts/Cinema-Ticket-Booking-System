@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinapex - Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="logo">Cinapex</div>
+        <nav>
+            <ul>
+                <li><a href="#">Now Showing</a></li>
+                <li><a href="#">Upcoming Movies</a></li>
+                <li><a href="#">Book Tickets</a></li>
+            </ul>
+        </nav>
+        <button id="adminLogin">Admin Login</button>
+    </header>
+
+    <section class="hero">
+        <h1>Welcome to Cinapex</h1>
+        <p>Find your favourite movies and book your tickets now!</p>
+        <input type="text" id="searchBox" placeholder="Search for a movie...">
+        <button onclick="searchMovie()">Search</button>
+    </section>
+
+    <section class="movies" id="moviesList">
+        <!--This is where movies will  be loaded-->
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
