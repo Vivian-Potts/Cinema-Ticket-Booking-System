@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class SeatController {
@@ -29,7 +30,7 @@ public class SeatController {
     }
 
     @GetMapping("/getSeats/{id}")
-    public ArrayList<Seat> getSeatsByShowingId(@PathVariable int id){
+    public List<Seat> getSeatsByShowingId(@PathVariable int id){
         return seatService.getByShowingId(id);
     }
 
