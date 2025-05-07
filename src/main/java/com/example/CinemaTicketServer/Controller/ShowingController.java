@@ -25,7 +25,7 @@ public class ShowingController {
 
 
     //Get Movie by ID
-    @GetMapping("/movie/{id}")
+    @GetMapping("/getShowingMovie/{id}")
     public ArrayList<Showing> getShowingMovies(@PathVariable int id) {
         return (ArrayList<Showing>) showingService.getShowingMovies(id);
     }

@@ -17,7 +17,7 @@ public class SeatController {
     @Autowired
     SeatService seatService;
 
-    @PostMapping("/book/{id}")
+    @PostMapping("/bookSeat/{id}")
     public ResponseEntity<String> bookSeat(@PathVariable int id, @RequestParam int seatNumber){
 
         return switch (seatService.bookSeat(seatNumber, id)) {

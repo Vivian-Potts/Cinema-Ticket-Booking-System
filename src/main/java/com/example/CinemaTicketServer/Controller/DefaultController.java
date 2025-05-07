@@ -10,6 +10,6 @@ public class DefaultController {
     @GetMapping("/")
     @ResponseBody
     public String home(){
-        return "Go away";
+        return "Home";
     }
 }

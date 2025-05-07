@@ -30,21 +30,32 @@ public class MovieService {
         movieRepo.save(movie);
     }
 
-    public ArrayList<Movie> getMovie(String name) throws JsonProcessingException {
+    public ArrayList<Movie> getMovie(String name){
+        return (ArrayList<Movie>) movieRepo.findByTitleIgnoreCase(name);
+    }
 
-        ArrayList<Movie> results = (ArrayList<Movie>) movieRepo.findByTitleIgnoreCase(name);
+    public ArrayList<Movie> fetchMovie(String name) throws JsonProcessingException {
 
-        if (results.isEmpty()){
-            ArrayList<Movie> apiResult = new ArrayList<>();
-            apiResult.add(objectMapper.readValue(movieApi.getByTitle(name), Movie.class));
-            System.out.println("Pulled from api: "+apiResult.getFirst().getTitle());
-            if (apiResult.getFirst().getTitle() != null) {
-                saveMovie(apiResult.getFirst());
-                return apiResult;
+        ArrayList<Movie> apiResult = new ArrayList<>();
+        Movie movie = objectMapper.readValue(movieApi.getByTitle(name), Movie.class);
+
+        if (movie != null && movie.getTitle() != null){
+            apiResult.add(movie);
+            saveMovie(movie);
+
+            System.out.println("Movie pulled from API " + movie.getTitle());
             }
+        else{
+            System.out.println("Movie not found");
+
         }
+//            System.out.println("Pulled from api: "+apiResult.getFirst().getTitle());
+//            if (apiResult.getFirst().getTitle() != null) {
+//                saveMovie(apiResult.getFirst());
+//                return apiResult;
+//            }
         //THIS IS NOT GONNA HANDLE NULL VERY WELL PLEASE DONT JUST LEAVE IT PLEASE
-        return results;
+        return apiResult;
 
 
     }

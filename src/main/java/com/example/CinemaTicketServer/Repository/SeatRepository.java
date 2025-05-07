@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Integer> {
     public List<Seat> findByShowingId(int showing_id);
+
+    ArrayList<Seat> getByShowingId(int id);
 }

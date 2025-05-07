@@ -6,10 +6,7 @@ import com.example.CinemaTicketServer.Service.MovieService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,10 +24,19 @@ public class MovieController {
 
     @GetMapping("/get")
     @ResponseBody
-    public List<Movie> showExampleMovie(@RequestParam String title) throws JsonProcessingException {
+    public List<Movie> getMovie(@RequestParam String title){
         System.out.println("Querying: "+title);
         return movieService.getMovie(title);
     }
+
+    @PostMapping("/fetch")
+    @ResponseBody
+    public List<Movie> fetchMovie(@RequestParam String title) throws JsonProcessingException{
+        System.out.println("Fetching: " +title);
+        return movieService.fetchMovie(title);
+
+    }
+
     @GetMapping("/getPoster")
     @ResponseBody
     public ArrayList<String> getPoster(@RequestParam String title) throws JsonProcessingException {

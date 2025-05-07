@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 @EnableWebSecurity
@@ -37,10 +38,13 @@ public class SecurityConfig {
                                 //Public endpoints
                                 .requestMatchers("/").permitAll()
                                 .requestMatchers("/showings").permitAll()
-                                .requestMatchers("/get", "/getPoster").permitAll()
-                                .requestMatchers("/movie/**").permitAll()
+                                .requestMatchers("/get", "/getPoster", "/fetch").permitAll()
+                                .requestMatchers("/getShowingMovie/**").permitAll()
                                 .requestMatchers("/book/**").permitAll()
                                 .requestMatchers("/getSeats/**").permitAll()
+                                .requestMatchers("/bookSeat/**").permitAll()
+
+
 
                                 .anyRequest().authenticated()
 
