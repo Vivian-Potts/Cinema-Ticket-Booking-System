@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class SeatService {
@@ -31,9 +32,9 @@ public class SeatService {
         }
     }
 
-    public ArrayList<Seat> getByShowingId(int id){
+    public List<Seat> getByShowingId(int id){
         
-        return seatRepository.getByShowingId(id);
+        return seatRepository.findByShowingId(id);
     }
 
 }
