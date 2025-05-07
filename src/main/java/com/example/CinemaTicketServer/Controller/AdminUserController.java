@@ -44,7 +44,7 @@ public class AdminUserController {
     }
 
     // Find a specific user by username
-    @GetMapping("/{username}")
+    @GetMapping("getUser/{username}")
     @PreAuthorize("hasRole('ADMIN')")
     public AdminUsers findUser(@PathVariable String username) {
         return auService.findUser(username);
@@ -58,7 +58,7 @@ public class AdminUserController {
     }
 
     // Add a new user (admin only)
-    @PostMapping("/add")
+    @PostMapping("/adduser")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> addUser(@RequestParam String username, @RequestParam String password) {
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
@@ -81,7 +81,7 @@ public class AdminUserController {
     }
 
     //Delete showing
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/deleteShowing/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public Showing deleteById(@PathVariable int id){
        return showingService.deleteById(id);
