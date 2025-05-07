@@ -21,7 +21,7 @@ public class MovieController {
     @Autowired
     private ObjectMapper objectMapper;
 
-
+    @CrossOrigin(origins = "http://localhost:63342")
     @GetMapping("/get")
     @ResponseBody
     public List<Movie> getMovie(@RequestParam String title){
